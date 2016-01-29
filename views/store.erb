@@ -82,6 +82,14 @@
           </form>
         </div>
       </div>
+      <div id="map">
+        <iframe
+          width="600"
+          height="450"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCyGqXIax5dvyWIM64xaAd-i75f2PE07fo&q=<%= @location %>" allowfullscreen>
+        </iframe>
+      </div>
     <% else %>
       <p>
         Not Provided

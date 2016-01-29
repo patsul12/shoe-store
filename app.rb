@@ -4,6 +4,7 @@ require 'sinatra/activerecord'
 require 'pg'
 require './lib/store'
 require './lib/brand'
+require 'geokit'
 require "pry"
 
 get '/' do
@@ -44,6 +45,10 @@ end
 get '/stores/:id' do
   @store = Store.find(params[:id])
   @brands = Brand.all
+  @location = nil
+  if !@store.address.nil?
+    @location = @store.address.split().join("+")
+  end
   erb :store
 end
 
