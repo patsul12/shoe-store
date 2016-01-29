@@ -3,16 +3,16 @@ ENV['RACK_ENV'] = 'test'
 require 'sinatra/activerecord'
 require 'rspec'
 require 'pg'
-require 'recipe'
-require 'tag'
+require 'store'
+require 'brand'
 
 RSpec.configure do |config|
   config.after(:each) do
-    Recipe.all.each do |r|
-      r.destroy
+    Store.all.each do |s|
+      s.destroy
     end
-    Tag.all.each do |t|
-      t.destroy
+    Brand.all.each do |b|
+      b.destroy
     end
   end
 end
