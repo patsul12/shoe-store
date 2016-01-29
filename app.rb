@@ -15,15 +15,29 @@ post '/stores' do
   name = params[:store_name]
   description = params[:store_description]
   address = params[:store_address]
-  Store.create({name: name, description: description, address: address})
-  redirect '/'
+  store = Store.create({name: name, description: description, address: address})
+  if store.errors.any?
+    @stores = Store.all
+    @brands = Brand.all
+    @errors = store.errors
+    erb :index
+  else
+    redirect '/'
+  end
 end
 
 post '/brands' do
   name = params[:brand_name]
   description = params[:brand_description]
-  Brand.create({name: name, description: description})
-  redirect '/'
+  brand = Brand.create({name: name, description: description})
+  if brand.errors.any?
+    @stores = Store.all
+    @brands = Brand.all
+    @errors = brand.errors
+    erb :index
+  else
+    redirect '/'
+  end
 end
 
 get '/stores/:id' do

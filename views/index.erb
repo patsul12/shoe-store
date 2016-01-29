@@ -1,4 +1,9 @@
 <div class="row">
+  <% if !@errors.nil? %>
+    <div class="alert alert-danger" role="alert">
+      <span>Name already in use</span>
+    </div>
+  <% end %>
   <div class="col-xs-6 stores">
     <h3>Stores</h3>
     <ul>
