@@ -15,7 +15,7 @@ class AddStoresAndBrands < ActiveRecord::Migration
       b.timestamps
     end
 
-    create_table(:stores_brands) do |s|
+    create_table(:brands_stores) do |s|
       s.integer :store_id
       s.integer :brand_id
     end

@@ -23,17 +23,17 @@ ActiveRecord::Schema.define(version: 20160129155120) do
     t.datetime "updated_at"
   end
 
+  create_table "brands_stores", force: :cascade do |t|
+    t.integer "store_id"
+    t.integer "brand_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "stores_brands", force: :cascade do |t|
-    t.integer "store_id"
-    t.integer "brand_id"
   end
 
 end
