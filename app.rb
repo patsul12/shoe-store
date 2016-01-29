@@ -89,7 +89,21 @@ get '/brands/:id' do
   erb :brand
 end
 
-post '/brands/:id/brands' do
+patch '/brands/:id' do
+  @brand = Brand.find(params[:id])
+  name = params[:updated_name]
+  description = params[:updated_description]
+  attributes = {name: name, description: description}
+  attributes.each do |k,v|
+    if v.nil?
+      attributes.delete(k)
+    end
+  end
+  @brand.update(attributes)
+  redirect "brands/#{@brand.id}"
+end
+
+post '/brands/:id/stores' do
   brand = Brand.find(params[:id])
   store = Store.find_by(name: params[:store_name])
   if !brand.stores.exists?(store.id)
