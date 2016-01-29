@@ -1,9 +1,11 @@
 <div class="row">
+  <!-- error handling for the forms on the page -->
   <% if !@errors.nil? %>
     <div class="alert alert-danger" role="alert">
       <span>Name already in use</span>
     </div>
   <% end %>
+
   <div class="col-xs-6 stores">
     <h3>Stores</h3>
     <ul>

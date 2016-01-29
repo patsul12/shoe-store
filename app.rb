@@ -4,6 +4,7 @@ require 'sinatra/activerecord'
 require 'pg'
 require './lib/store'
 require './lib/brand'
+require "pry"
 
 get '/' do
   @stores = Store.all
@@ -44,6 +45,21 @@ get '/stores/:id' do
   @store = Store.find(params[:id])
   @brands = Brand.all
   erb :store
+end
+
+patch '/stores/:id' do
+  @store = Store.find(params[:id])
+  name = params[:updated_name]
+  description = params[:updated_description]
+  address = params[:updated_address]
+  attributes = {name: name, description: description, address: address}
+  attributes.each do |k,v|
+    if v.nil?
+      attributes.delete(k)
+    end
+  end
+  @store.update(attributes)
+  redirect "stores/#{@store.id}"
 end
 
 post '/stores/:id/brands' do
