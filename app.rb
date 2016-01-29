@@ -19,7 +19,19 @@ post '/stores' do
   redirect '/'
 end
 
+post '/brands' do
+  name = params[:brand_name]
+  description = params[:brand_description]
+  Brand.create({name: name, description: description})
+  redirect '/'
+end
+
 get '/stores/:id' do
   @store = Store.find(params[:id])
   erb :store
+end
+
+get '/brands/:id' do
+  @brand = Brand.find(params[:id])
+  erb :brand
 end
