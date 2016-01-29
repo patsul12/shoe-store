@@ -17,4 +17,14 @@ describe Brand do
       expect(test_brand.stores).to(eq([new_store]))
     end
   end
+
+  describe "remove a store to a brand" do
+    it 'allows you to add a relation between a given brand and a store' do
+      new_store = create_store("payless", "test description", "1234 test way")
+      test_brand = create_brand("nike", "big brand")
+      test_brand.stores.push(new_store)
+      test_brand.stores.delete(new_store)
+      expect(test_brand.stores).to(eq([]))
+    end
+  end
 end
