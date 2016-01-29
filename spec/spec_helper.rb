@@ -16,3 +16,11 @@ RSpec.configure do |config|
     end
   end
 end
+
+def create_store(name = nil, description = nil, address = nil)
+  return Store.create({name: name, description: description, address: address })
+end
+
+def create_brand(name = nil, description = nil)
+  return Store.create({name: name, description: description})
+end
