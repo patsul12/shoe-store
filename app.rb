@@ -28,10 +28,30 @@ end
 
 get '/stores/:id' do
   @store = Store.find(params[:id])
+  @brands = Brand.all
   erb :store
+end
+
+post '/stores/:id/brands' do
+  store = Store.find(params[:id])
+  brand = Brand.find_by(name: params[:brand_name])
+  if !store.brands.exists?(brand)
+    store.brands.push(brand)
+  end
+  redirect "/stores/#{store.id}"
 end
 
 get '/brands/:id' do
   @brand = Brand.find(params[:id])
+  @stores = Store.all
   erb :brand
+end
+
+post '/brands/:id/brands' do
+  brand = Brand.find(params[:id])
+  store = Store.find_by(name: params[:store_name])
+  if !brand.stores.exists?(store)
+    brand.stores.push(store)
+  end
+  redirect "/brands/#{brand.id}"
 end

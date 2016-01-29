@@ -1,0 +1,29 @@
+<div class="row">
+  <h3><%= @brand.name %></h3>
+  <ul>
+    <% @brand.stores.each do |store| %>
+      <li><a href="/stores/<%= store.id %>"><%= store.name %></a></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="row">
+  <form class="form-inline" action="/brands/<%= @brand.id %>/brands" method="post">
+    <div class=" col-xs-4 form-group">
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Stores <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <% @stores.each do |store| %>
+              <li><a href="#" id="<%= store.name %>" class="store"><%= store.name %></a></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <input required readonly type="text" name="store_name" class="form-control store_name" aria-label="...">
+      <button type="submit" class="btn btn-success" name="add_store">Add Store</button>
+    </div>
+  </form>
+</div>
