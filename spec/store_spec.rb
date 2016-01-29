@@ -9,4 +9,13 @@ describe Store do
       expect(new_store.address).to(eq("1234 test way"))
     end
   end
+
+  describe "add a brand to a store" do
+    it 'allows you to add a relation between a given brand and a store' do
+      new_store = create_store("payless", "test description", "1234 test way")
+      test_brand = create_brand("nike", "big brand")
+      new_store.brands.push(test_brand)
+      expect(new_store.brands).to(eq([test_brand]))
+    end
+  end
 end
