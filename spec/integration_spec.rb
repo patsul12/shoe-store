@@ -43,7 +43,7 @@ feature 'add a brand to a store path', js: true do
   end
 end
 
-feature 'remove a brand from a store path' do
+feature 'remove a brand from a store path', js: true do
   scenario 'the user can remove a brand from a given store' do
     visit '/'
     create_new_store

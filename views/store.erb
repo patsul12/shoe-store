@@ -8,7 +8,7 @@
             <a href="/brands/<%= brand.id %>"><%= brand.name %></a>
             <input type="hidden" name="_method" value="delete">
             <input type="hidden" name="brand_id" value="<%= brand.id %>">
-            <button type="submit" name="delete <%= brand.name %>" class="form-control btn btn-danger">X</button>
+            <button type="submit" id="delete <%= brand.name %>" class="form-control btn btn-danger">X</button>
           </form>
         </div>
       <% end %>

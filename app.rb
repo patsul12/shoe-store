@@ -35,7 +35,7 @@ end
 post '/stores/:id/brands' do
   store = Store.find(params[:id])
   brand = Brand.find_by(name: params[:brand_name])
-  if !store.brands.exists?(brand)
+  if !store.brands.exists?(brand.id)
     store.brands.push(brand)
   end
   redirect "/stores/#{store.id}"
@@ -57,7 +57,7 @@ end
 post '/brands/:id/brands' do
   brand = Brand.find(params[:id])
   store = Store.find_by(name: params[:store_name])
-  if !brand.stores.exists?(store)
+  if !brand.stores.exists?(store.id)
     brand.stores.push(store)
   end
   redirect "/brands/#{brand.id}"
