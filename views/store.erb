@@ -1,13 +1,19 @@
 <div class="row">
-  <h3><%= @store.name %></h3>
-  <ul>
-    <% @store.brands.each do |brand| %>
-      <li><a href="/brands/<%= brand.id %>"><%= brand.name %></a></li>
-    <% end %>
-  </ul>
-</div>
-
-<div class="row">
+  <div class="col-xs-12">
+    <h3><%= @store.name %></h3>
+    <ul>
+      <% @store.brands.each do |brand| %>
+        <div class="col-xs-4">
+          <form class="form-inline" action="/stores/<%= @store.id %>/brands" method="post">
+            <a href="/brands/<%= brand.id %>"><%= brand.name %></a>
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="brand_id" value="<%= brand.id %>">
+            <button type="submit" name="delete <%= brand.name %>" class="form-control btn btn-danger">X</button>
+          </form>
+        </div>
+      <% end %>
+    </ul>
+  </div>
   <form class="form-inline" action="/stores/<%= @store.id %>/brands" method="post">
     <div class=" col-xs-4 form-group">
       <div class="input-group">

@@ -1,5 +1,6 @@
 ENV['RACK_ENV'] = 'test'
 
+require 'database_cleaner'
 require 'sinatra/activerecord'
 require 'rspec'
 require 'pg'
@@ -8,12 +9,8 @@ require 'brand'
 
 RSpec.configure do |config|
   config.after(:each) do
-    Store.all.each do |s|
-      s.destroy
-    end
-    Brand.all.each do |b|
-      b.destroy
-    end
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean
   end
 end
 

@@ -2,7 +2,14 @@
   <h3><%= @brand.name %></h3>
   <ul>
     <% @brand.stores.each do |store| %>
-      <li><a href="/stores/<%= store.id %>"><%= store.name %></a></li>
+      <div class="col-xs-12">
+        <form class="form-inline" action="/brands/<%= @brand.id %>/stores" method="post">
+          <a href="/brands/<%= store.id %>"><%= store.name %></a>
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="store_id" value="<%= store.id %>">
+          <button type="submit" class="form-control btn btn-danger">X</button>
+        </form>
+      </div>
     <% end %>
   </ul>
 </div>

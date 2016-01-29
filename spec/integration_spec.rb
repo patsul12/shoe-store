@@ -1,10 +1,20 @@
 require 'capybara/rspec'
 require './app'
+require 'database_cleaner'
+
 Capybara.app = Sinatra::Application
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
 Capybara.javascript_driver = :chrome
+
+RSpec.configure do |config|
+  config.after(:each) do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean
+  end
+end
+
 set(:show_exceptions, false)
 
 feature 'add a store path' do
@@ -28,11 +38,19 @@ feature 'add a brand to a store path', js: true do
     visit '/'
     create_new_store
     create_new_brand
-    click_link("Test-store")
-    click_button "dropdown"
-    click_link("Test-brand")
-    click_button "Add Brand"
+    add_brand_to_store
     expect(page).to have_content("Test-brand")
+  end
+end
+
+feature 'remove a brand from a store path' do
+  scenario 'the user can remove a brand from a given store' do
+    visit '/'
+    create_new_store
+    create_new_brand
+    add_brand_to_store
+    click_button 'delete Test-brand'
+    expect(page).not_to have_content("Test-brand")
   end
 end
 
@@ -47,4 +65,11 @@ def create_new_brand
   fill_in("brand_name", with: "Test-brand")
   fill_in("brand_description", with: "Test brand description")
   click_button 'Create Brand'
+end
+
+def add_brand_to_store
+  click_link("Test-store")
+  click_button "dropdown"
+  click_link("Test-brand")
+  click_button "Add Brand"
 end

@@ -41,6 +41,13 @@ post '/stores/:id/brands' do
   redirect "/stores/#{store.id}"
 end
 
+delete '/stores/:id/brands' do
+  store = Store.find(params[:id])
+  brand = Brand.find(params[:brand_id])
+  store.brands.delete(brand)
+  redirect "/stores/#{store.id}"
+end
+
 get '/brands/:id' do
   @brand = Brand.find(params[:id])
   @stores = Store.all
@@ -53,5 +60,12 @@ post '/brands/:id/brands' do
   if !brand.stores.exists?(store)
     brand.stores.push(store)
   end
+  redirect "/brands/#{brand.id}"
+end
+
+delete '/brands/:id/stores' do
+  brand = Brand.find(params[:id])
+  store = Store.find(params[:store_id])
+  brand.stores.delete(store)
   redirect "/brands/#{brand.id}"
 end
